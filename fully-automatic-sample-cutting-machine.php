@@ -1,0 +1,91 @@
+<?php
+require_once __DIR__ . '/seo.php'; // load site constants before the product config below
+
+$P = array(
+    'slug'        => 'fully-automatic-sample-cutting-machine',
+    'name'        => 'Fully Automatic Fabric Sample Cutting Machine',
+    'h1'          => 'Fully Automatic Fabric Sample Cutting Machine',
+    'category'    => 'Textile Machinery > Fabric Sample Cutting Machines',
+    'image'       => 'assets/img/portfolio/Fully-Automatic-Sample-Cutting-Machine-Niruma.webp',
+    'meta_title'  => 'Fully Automatic Fabric Sample Cutting Machine | Niruma',
+    'meta_desc'   => 'PLC-controlled zigzag fabric sample cutter with touch screen and laser marking. Cuts 60 mm layers in one stroke. Blades 13"-60". Ahmedabad, India.',
+    'keywords'    => 'fully automatic fabric sample cutting machine, automatic zigzag fabric cutter, PLC controlled sample cutting machine, touch screen fabric sample cutter, 60 mm fabric cutting capacity, laser marking fabric cutter, textile sample cutting machine manufacturer, Niruma Textile Machinery',
+    'gallery'     => array(
+        'assets/img/portfolio/Fully-Automatic-Sample-Cutting-Machine-Niruma.webp',
+        'assets/img/portfolio/Fully-Automatic-Sample-Cutting-Machine-2-Niruma.webp',
+        'assets/img/portfolio/Fully-Automatic-Sample-Cutting-Machine-3-Niruma.webp',
+    ),
+    'intro'       => array(
+        'The <b>Fully Automatic Fabric Sample Cutting Machine</b> built by <b>Niruma Textile Machinery</b> is a PLC-controlled zigzag swatch cutter made for fabric mills, composite mills, denim units and export houses that cut a large number of samples every day. Instead of setting the size mechanically, the operator simply types the sample length on a colour touch screen and the machine positions the sliding table, marks the reference with a red laser line and completes the cut in one cycle.',
+        'Because the sample dimensions are programmed rather than measured by eye, the same swatch is reproduced identically hundreds of times &mdash; which matters when a buyer in another country is comparing your fabric against an approved sample. The machine is built around a <b>worm gear box system</b> and cuts up to <b>60 mm of fabric in a single stroke</b>, so heavy denim, canvas and stacked technical fabrics can be cut without re-layering.',
+        'As a <b>fabric sample cutting machine manufacturer</b> in Ahmedabad, Gujarat, we supply this model in blade widths from <b>13 inches to 60 inches</b> and supply it to buyers in India, Bangladesh, Pakistan, UAE, Saudi Arabia, Egypt, Turkey and Vietnam.',
+    ),
+    'features'    => array(
+        'PLC controlled system with programmable sample cutting',
+        'Colour display for live cycle status and machine settings',
+        'Programming of the sample to be cut directly on the touch screen',
+        'Red laser line marking system to locate the zero-mark reference on fabric',
+        'Worm gear box system operated for smooth, positive cutting drive',
+        'Cuts fabric layers up to 60 mm at a single stroke',
+        'Calibrated scale bar on the sliding table for accurate sample sizing',
+        'Model available in blade sizes of 13", 18", 24", 36", 48" and 60"',
+    ),
+    'why'         => array(
+        array('t' => 'Repeatable accuracy', 'd' => 'Programming the sample size on the touch screen removes manual measuring. Every swatch of the same programme comes out identical, which is essential for buyer approvals, lab dips and export documentation.'),
+        array('t' => 'High output on heavy fabrics', 'd' => 'The worm gear box drive and 60 mm single-stroke cutting capacity handle denim, canvas and layered technical fabrics without the operator having to re-stack the plies.'),
+        array('t' => 'Minimal operator training', 'd' => 'An operator who can operate a touch screen can run this machine. Training time is short, which reduces dependence on skilled staff during shift changes.'),
+        array('t' => 'Reduced sample waste', 'd' => 'Accurate positioning means fewer rejected swatches and less fabric consumed on test cuts, directly improving sample-room efficiency.'),
+        array('t' => 'Wide blade choice', 'd' => 'Available in 13", 18", 24", 36", 48" and 60" blades, so one machine family covers narrow swatches through full-width fabric samples.'),
+        array('t' => 'Built for continuous duty', 'd' => 'Heavy fabrication, a worm gear box drive and CNC-aligned mechanisms are chosen for long working life in a busy sample room, not for the lowest purchase price.'),
+    ),
+    'specs'       => array(
+        array(
+            'title' => 'Machine Specification',
+            'rows'  => array(
+                array('k' => 'Model Type', 'v' => 'Fully Automatic / PLC Controlled'),
+                array('k' => 'Control System', 'v' => 'PLC with colour display and touch screen programming'),
+                array('k' => 'Drive Type', 'v' => 'Worm Gear Box System Operated'),
+                array('k' => 'Maximum Cutting Capacity', 'v' => 'Up to 60 mm fabric layers at a single stroke'),
+                array('k' => 'Blade Sizes Available', 'v' => '13", 18", 24", 36", 48" and 60"'),
+                array('k' => 'Cut Type', 'v' => 'Zigzag / swatch cutting'),
+                array('k' => 'Sample Programming', 'v' => 'Programmable sample size via touch screen'),
+                array('k' => 'Zero Mark Reference', 'v' => 'Red laser line marking system'),
+                array('k' => 'Measuring Aid', 'v' => 'Calibrated scale bar on sliding table'),
+                array('k' => 'Fabric Compatibility', 'v' => 'All types of fabric &mdash; cotton, polyester, denim, silk, canvas, technical and non-woven'),
+                array('k' => 'Manufacturer', 'v' => 'Niruma Textile Machinery, ' . NAP_CITY . ', ' . NAP_REGION . ', India'),
+            ),
+        ),
+    ),
+    'applications' => array(
+        'Composite mills and spinning mills',
+        'Denim and garment manufacturers',
+        'Fabric trading and export houses',
+        'Design studios and product development departments',
+        'Quality control and sample rooms',
+        'Technical textile and non-woven fabric units',
+        'Home textile and upholstery fabric producers',
+        'Furniture and curtain fabric manufacturers',
+    ),
+    'notes'       => array(
+        'Select the programme on the touch screen, enter the required sample length and the machine moves the sliding table to that position. The red laser line gives the exact zero-mark reference on the fabric so the operator aligns the ply accurately before the cut stroke.',
+        'For heavy fabrics the plies should be laid flat and evenly aligned against the guide. The machine then cuts up to 60 mm in a single stroke without vibration. For lighter fabrics, a lower layer setting reduces the effort required at each cycle.',
+        'Routine maintenance consists of blade replacement, worm gear box lubrication and a periodic check of the scale bar calibration. Niruma supplies spare blades and gear box oil with every machine.',
+    ),
+    'faqs'        => array(
+        array('q' => 'What is the difference between a fully automatic and an automatic sample cutting machine?', 'a' => 'An automatic sample cutting machine uses a hand wheel to move the sliding table and a lever to make the cut, so the operator sets each size. The fully automatic machine adds PLC programming with a colour touch screen, so the sample size is entered once and the machine repeats it, which is far faster when cutting hundreds of samples per day.'),
+        array('q' => 'How many layers of fabric can be cut at one time?', 'a' => 'Up to 60 mm of stacked fabric at a single stroke. In practical terms this means thick denim, canvas and multi-layer cotton or polyester plies can be cut together. Actual capacity depends on fabric weight, loft and blade sharpness.'),
+        array('q' => 'Which blade size should I choose?', 'a' => 'Choose a blade at least as wide as the widest sample you need to cut. 13" and 18" suit small swatches and lab dips, 24" suits standard development samples, and 36" to 60" is used for full-width or buyer-specific fabric samples.'),
+        array('q' => 'Can this machine cut denim and heavy canvas?', 'a' => 'Yes. The worm gear box drive and 60 mm single-stroke capacity are specifically suited to heavy fabrics such as denim, canvas and technical textiles.'),
+        array('q' => 'Is operator training included?', 'a' => 'Yes. Machines supplied within India include installation, commissioning and operator training. Overseas buyers receive video-based training and commissioning support, with an engineer visit available on request.'),
+        array('q' => 'Do you export this machine?', 'a' => 'Yes, we regularly export fully automatic sample cutting machines to Bangladesh, Pakistan, UAE, Saudi Arabia, Egypt, Turkey and Vietnam, with full export documentation and packing.'),
+    ),
+    'enquiry_hints' => array(
+        'Fabric type and weight (GSM)',
+        'Maximum layer thickness to be cut in mm',
+        'Required blade width in inches',
+        'Approximate samples cut per day',
+        'Quantity required and delivery location',
+    ),
+    'related'     => array('automatic-sample-cutting-machine', 'semi-automatic-sample-cutting-machine', 'fabric-inspection-machine'),
+);
+include __DIR__ . '/product-template.php';

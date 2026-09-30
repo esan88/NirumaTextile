@@ -1,0 +1,92 @@
+<?php
+require_once __DIR__ . '/seo.php'; // load site constants before the product config below
+
+$P = array(
+    'slug'        => 'fabric-rolling-machine',
+    'name'        => 'Fabric Rolling Machine',
+    'h1'          => 'Fabric Rolling Machine',
+    'category'    => 'Textile Machinery > Fabric Inspection & Rolling Machines',
+    'image'       => 'assets/img/portfolio/Fabric-Rolling-Machine-Niruma.webp',
+    'meta_title'  => 'Fabric Rolling Machine with Length Counter | Niruma',
+    'meta_desc'   => 'Fabric rolling machine with length counter meter, variable speed, AC inverter VFD drive, bow pipe and selvage guider for crease-free rolls.',
+    'keywords'    => 'fabric rolling machine, fabric length counter rolling machine, variable speed fabric rolling machine, AC inverter VFD fabric roller, bow pipe crease control machine, selvage guider fabric rolling, mild steel fabric rolling machine, textile machinery manufacturer, Niruma Textile Machinery',
+    'gallery'     => array(
+        'assets/img/portfolio/Fabric-Rolling-Machine-Niruma.webp',
+    ),
+    'intro'       => array(
+        'The <b>Fabric Rolling Machine</b> from <b>Niruma Textile Machinery</b> is built for fabric units that need finished fabric wound into tight, even, correctly measured rolls. A built-in <b>fabric length counter meter</b> records the length as the fabric rolls, so every roll leaves your machine with a verified metre reading &mdash; removing the manual counting that causes disputes in domestic and export shipments.',
+        'Roll quality depends on controlling creases and keeping the edge straight, and this machine handles both. A <b>bow pipe / scroll roll</b> controls crease formation, a <b>selvage guider</b> keeps the rolling straight, and <b>set tension controls</b> let you tune the winding pressure for different fabric weights. <b>CNC-aligned rollers with perfectly aligned shafts</b> ensure the fabric moves smoothly without snagging.',
+        'Speed is set with an <b>AC inverter variable frequency drive</b> controlling both speed and forward / reverse direction, driven by an imported gear box. We supply this <b>fabric rolling machine</b> as a <b>textile machinery manufacturer and exporter</b> based in Odhav, Ahmedabad since ' . FOUNDED_YEAR . '.',
+    ),
+    'features'    => array(
+        'Machine frame in mild steel construction with tie bars and guide roller deposit board',
+        'Fabric length counter meter for fabric measuring',
+        'Variable machine speed',
+        'Bow pipe / scroll roll to control crease',
+        'Selvage guider for straight rolling',
+        'Set tension controls',
+        'Driven by an imported gear box with electric motor',
+        'AC inverter variable frequency drive for machine speed and forward / reverse direction control',
+        'CNC aligned rollers with shafts in perfect alignment for proper movement with fabric',
+        'Various fabric input and output options',
+    ),
+    'why'         => array(
+        array('t' => 'Accuracy and quality', 'd' => 'The fabric length counter gives a verified metre reading on every roll, while CNC-aligned rollers ensure smooth rolling. Straight edges and consistent measurement both reduce customer complaints.'),
+        array('t' => 'Enhanced control', 'd' => 'Set tension controls and variable speed let you fine-tune the rolling process for everything from voile to denim, reducing fabric wastage and improving roll appearance.'),
+        array('t' => 'Crease-free results', 'd' => 'The bow pipe / scroll roll prevents hard creases forming during winding, which protects fabric quality and avoids rejects at the customer end.'),
+        array('t' => 'Straight, neat rolls', 'd' => 'The selvage guider keeps the fabric edge aligned while winding, so rolls are straight, tidy and stackable for storage or container loading.'),
+        array('t' => 'Reliable drive', 'd' => 'An imported gear box with an AC inverter VFD gives smooth speed control and the strength to handle heavier fabrics without slippage.'),
+        array('t' => 'Trusted excellence', 'd' => 'Built, assembled and trial-tested in our own workshop, and backed by installation, commissioning and service support from Niruma Textile Machinery.'),
+    ),
+    'specs'       => array(
+        array(
+            'title' => 'Machine Specification',
+            'rows'  => array(
+                array('k' => 'Machine Type', 'v' => 'Fabric Rolling Machine'),
+                array('k' => 'Frame Construction', 'v' => 'Mild steel with tie bars, guide roller deposit board'),
+                array('k' => 'Length Measurement', 'v' => 'Fabric length counter meter'),
+                array('k' => 'Speed Control', 'v' => 'Variable machine speed'),
+                array('k' => 'Drive', 'v' => 'Imported gear box with electric motor'),
+                array('k' => 'Electrical Control', 'v' => 'AC inverter variable frequency drive (speed + forward / reverse)'),
+                array('k' => 'Rollers', 'v' => 'CNC aligned rollers with shafts in perfect alignment'),
+                array('k' => 'Crease Control', 'v' => 'Bow pipe / scroll roll'),
+                array('k' => 'Straight Rolling', 'v' => 'Selvage guider'),
+                array('k' => 'Tension', 'v' => 'Set tension controls'),
+                array('k' => 'Input / Output', 'v' => 'Various fabric input and output options'),
+                array('k' => 'Available Widths', 'v' => 'As per fabric width requirement (customisable)'),
+                array('k' => 'Manufacturer', 'v' => 'Niruma Textile Machinery, ' . NAP_CITY . ', ' . NAP_REGION . ', India'),
+            ),
+        ),
+    ),
+    'applications' => array(
+        'Composite mills and fabric manufacturers',
+        'Weaving and spinning mills',
+        'Fabric trading and warehousing units',
+        'Dyeing and processing plants',
+        'Garment and apparel export houses',
+        'Home textile and curtain fabric units',
+        'Upholstery and technical fabric producers',
+    ),
+    'notes'       => array(
+        'Align the fabric selvage with the selvage guider, set the required tension for the fabric weight, and select the speed on the AC inverter VFD. The counter meter records the length continuously as the fabric winds onto the roll.',
+        'The bow pipe / scroll roll should be set to give a slight bow across the fabric width. Correct bow control is the single most important factor in preventing creases in the finished roll.',
+        'For very heavy fabrics such as denim, reduce the speed and increase tension gradually. Over-tight tension on heavy fabric can cause the roll to form a cone, which makes handling and transport difficult.',
+    ),
+    'faqs'        => array(
+        array('q' => 'What is a fabric rolling machine?', 'a' => 'It is a machine that winds finished fabric onto a core in a tight, even roll. This Niruma model combines a fabric length counter meter, variable speed, crease control, selvage guiding and tension control so that every roll is measured, straight and free of hard creases.'),
+        array('q' => 'Why is a fabric length counter important?', 'a' => 'A built-in length counter meter measures the fabric as it rolls, giving a verified metre reading for each roll. This removes manual counting, reduces short-delivery disputes and speeds up export documentation.'),
+        array('q' => 'How do you prevent creases while rolling fabric?', 'a' => 'A bow pipe or scroll roll is fitted to create a slight bow across the fabric width during winding. This keeps the fabric relaxed and prevents hard creases forming in the finished roll.'),
+        array('q' => 'What is the function of the selvage guider?', 'a' => 'The selvage guider keeps the fabric edge aligned while winding, so the roll comes out straight, tidy and stackable. Straight rolls are essential for container loading and for automated fabric handling systems.'),
+        array('q' => 'Can the rolling speed be adjusted?', 'a' => 'Yes. An AC inverter variable frequency drive controls machine speed as well as forward and reverse direction, so one machine handles both slow careful rolling and fast bulk output.'),
+        array('q' => 'How is this different from a fabric inspection machine?', 'a' => 'Our fabric inspection machine combines an inclined inspection table for visual defect checking with rolling. The plain fabric rolling machine focuses on winding, measuring and roll quality. Choose the inspection machine if you inspect fabric in the same pass.'),
+    ),
+    'enquiry_hints' => array(
+        'Maximum fabric width',
+        'Fabric type and weight (GSM)',
+        'Roll diameter and core size required',
+        'Required rolling speed in metres per minute',
+        'Quantity required and delivery location',
+    ),
+    'related'     => array('fabric-inspection-machine', 'taka-folding-machine', 'fabric-roll-wrapping-machine'),
+);
+include __DIR__ . '/product-template.php';

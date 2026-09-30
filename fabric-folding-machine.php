@@ -1,0 +1,91 @@
+<?php
+require_once __DIR__ . '/seo.php'; // load site constants before the product config below
+
+$P = array(
+    'slug'        => 'fabric-folding-machine',
+    'name'        => 'Fabric Folding Machine',
+    'h1'          => 'Fabric Folding Machine (Plaiting Machine)',
+    'category'    => 'Textile Machinery > Fabric Folding Machines',
+    'image'       => 'assets/img/portfolio/Fabric-Folding-Machine-Niruma.webp',
+    'meta_title'  => 'Fabric Folding Machine / Plaiting Machine | Niruma',
+    'meta_desc'   => 'Fabric plaiting machine with adjustable support, variable speed to 85 RPM and 1.2 m plaiting width. Handles wet and dry fabric.',
+    'keywords'    => 'fabric folding machine, plaiting machine textile, fabric plaiting machine manufacturer, variable speed fabric folding machine, wet and dry fabric folding machine, textile folding machine India, 85 RPM plaiting machine, fabric folding machine for towel and jute, Niruma Textile Machinery',
+    'gallery'     => array(
+        'assets/img/portfolio/Fabric-Folding-Machine-Niruma.webp',
+    ),
+    'intro'       => array(
+        'The <b>Fabric Folding Machine</b> manufactured by <b>Niruma Textile Machinery</b> plaits folded fabric into a neat, uniform stack &mdash; known in the industry as a plaiting or lapping machine. It is used after rolling, inspection or finishing so that fabric arrives at the retail counter, cutting floor or dispatch bay as an even, presentable, easily handled pile.',
+        'The machine is <b>easy to install and operate</b> and can be <b>mounted on an adjustable type support</b>, so it can be positioned to suit your existing table height and workflow. It handles <b>both dry and wet fabrics</b>, which makes it suitable for towel, jersey and pre-washed material as well as dry finished fabric.',
+        'Roller material is selected according to the application, and <b>variable speed up to 80&ndash;85 RPM</b> allows fine control. Capacity is up to <b>800 metres of fabric and 1.2 metre plaiting width</b>, driven by a <b>3 phase motor with panel board and drive system</b>. We build these as a <b>textile machinery manufacturer and exporter</b> in Ahmedabad, Gujarat since ' . FOUNDED_YEAR . '.',
+    ),
+    'features'    => array(
+        'Easy installation and operation',
+        'Easily mounted on adjustable type support',
+        'Suitable for use in dry / wet fabrics',
+        'Different roller materials available for special applications',
+        'Suitable for higher speed and broader fabric width',
+        'Safety rods provided to avoid accidents and prevent damage to rollers',
+        'Best performance for cotton, polyester, woven, knitted, towel fabrics, jute, tyre cord and foils',
+        '3 phase motor with panel board and drive system',
+        'Variable speed up to 80-85 RPM',
+        'Capacity up to 800 metres',
+        'Maximum plaiting width of 1.2 metre',
+    ),
+    'why'         => array(
+        array('t' => 'User-friendly design', 'd' => 'Straightforward installation and operation means the machine is up and running quickly and can be handled by existing staff without specialist training.'),
+        array('t' => 'Optimal speed and capacity', 'd' => 'Variable speed up to 85 RPM with capacity for 800 metres of fabric and 1.2 metre plaiting width lets one machine meet high-demand folding tasks.'),
+        array('t' => 'Handles wet and dry fabric', 'd' => 'The machine performs equally well on dry finished fabric and on wet or pre-washed material, which makes it versatile across towel, jersey and woven lines.'),
+        array('t' => 'Application-specific rollers', 'd' => 'Different roller materials are supplied for special applications, so the machine can be configured for cotton, polyester, knitted, towel, jute, tyre cord or foil.'),
+        array('t' => 'Safer for operators', 'd' => 'Safety rods are provided to avoid accidents and to prevent damage to the rollers, reducing downtime and improving operator confidence.'),
+        array('t' => 'Quality and innovation', 'd' => 'Niruma Textile Machinery is committed to delivering advanced, reliable textile solutions, backed by installation and service support.'),
+    ),
+    'specs'       => array(
+        array(
+            'title' => 'Machine Specification',
+            'rows'  => array(
+                array('k' => 'Machine Type', 'v' => 'Fabric Folding / Plaiting Machine'),
+                array('k' => 'Mounting', 'v' => 'Adjustable type support'),
+                array('k' => 'Speed', 'v' => 'Variable speed up to 80-85 RPM'),
+                array('k' => 'Capacity', 'v' => 'Up to 800 metres'),
+                array('k' => 'Maximum Plaiting Width', 'v' => '1.2 metre'),
+                array('k' => 'Power', 'v' => '3 phase motor with panel board and drive system'),
+                array('k' => 'Fabric Condition', 'v' => 'Dry and wet fabrics'),
+                array('k' => 'Roller Options', 'v' => 'Different roller materials for special applications'),
+                array('k' => 'Fabrics Supported', 'v' => 'Cotton, polyester, woven, knitted, towel, jute, tyre cord, foils'),
+                array('k' => 'Safety', 'v' => 'Safety rods provided to avoid accidents and roller damage'),
+                array('k' => 'Manufacturer', 'v' => 'Niruma Textile Machinery, ' . NAP_CITY . ', ' . NAP_REGION . ', India'),
+            ),
+        ),
+    ),
+    'applications' => array(
+        'Fabric mills and composite mills',
+        'Home textile and towel manufacturers',
+        'Knitwear and jersey fabric units',
+        'Jute and technical fabric producers',
+        'Carpet, tyre cord and foil handling units',
+        'Fabric trading and retail display stock',
+        'Garment and apparel finishing departments',
+    ),
+    'notes'       => array(
+        'Mount the machine on the adjustable support and set the height to suit your folding table. Guide the fabric evenly into the plaiting arrangement, then select the required speed on the panel board.',
+        'Variable speed is the key to a good plait. Use a lower speed for slippery fabrics such as jersey and satin, and a higher speed for firm woven and towel material.',
+        'Safety rods should remain in place at all times &mdash; they prevent operator accidents and stop foreign material from damaging the rollers. Clean rollers regularly as lint build-up causes uneven plaiting.',
+    ),
+    'faqs'        => array(
+        array('q' => 'What is a fabric folding or plaiting machine?', 'a' => 'It is a machine that folds fabric back on itself into a uniform, even stack called a plait or lap. It is normally used after rolling or finishing to prepare fabric for retail display, cutting or dispatch.'),
+        array('q' => 'What is the maximum plaiting width?', 'a' => 'Up to 1.2 metres. Wider configurations can be discussed on request depending on your table layout and fabric width.'),
+        array('q' => 'What speed does the machine run at?', 'a' => 'Variable speed up to 80-85 RPM, allowing you to slow down for slippery fabrics and run faster for firm woven and towel material.'),
+        array('q' => 'Can it fold wet or pre-washed fabric?', 'a' => 'Yes, the machine is suitable for both dry and wet fabrics, which makes it practical for towel, jersey and pre-washed material lines.'),
+        array('q' => 'Which fabrics can be folded?', 'a' => 'Cotton, polyester, woven, knitted, towel fabrics, jute, tyre cord and foils. Different roller materials are available for special applications.'),
+        array('q' => 'How is the machine installed?', 'a' => 'Installation is straightforward. The machine is easily mounted on an adjustable type support, so you can set the working height to match your existing table.'),
+    ),
+    'enquiry_hints' => array(
+        'Fabric types to be folded',
+        'Maximum fabric width',
+        'Required plaiting length in metres',
+        'Preferred speed / production requirement',
+        'Quantity required and delivery location',
+    ),
+    'related'     => array('taka-folding-machine', 'fabric-rolling-machine', 'fabric-inspection-machine'),
+);
+include __DIR__ . '/product-template.php';

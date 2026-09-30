@@ -1,0 +1,30 @@
+# robots.txt for https://nirumatextilemachinery.in
+# Note: /assets is intentionally ALLOWED so Google can crawl the
+# CSS/JS needed to render the pages and index the product images.
+
+User-agent: *
+Allow: /
+Allow: /assets/
+
+# Internal templates - no value in the index
+Disallow: /seo
+Disallow: /product-template
+Disallow: /error_log
+
+# Crawl the PDF brochure - it is linked from the nav and footer
+Allow: /Niruma-TM-Catalogue.pdf
+
+# AI / answer engines: allow, they are a growing traffic source
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+Sitemap: https://nirumatextilemachinery.in/sitemap.xml

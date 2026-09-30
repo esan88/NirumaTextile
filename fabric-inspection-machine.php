@@ -1,0 +1,92 @@
+<?php
+require_once __DIR__ . '/seo.php'; // load site constants before the product config below
+
+$P = array(
+    'slug'        => 'fabric-inspection-machine',
+    'name'        => 'Fabric Inspection and Rolling Machine',
+    'h1'          => 'Fabric Inspection and Rolling Machine',
+    'category'    => 'Textile Machinery > Fabric Inspection & Rolling Machines',
+    'image'       => 'assets/img/portfolio/Fabric-Inspection-and-Rolling-Machine-Niruma.webp',
+    'meta_title'  => 'Fabric Inspection and Rolling Machine | Niruma Textile',
+    'meta_desc'   => 'Fabric inspection machine with inclined table, imported gearbox, AC inverter VFD, CNC rollers, bow pipe and selvage guider. Ahmedabad.',
+    'keywords'    => 'fabric inspection machine, fabric inspection and rolling machine, fabric inspection table, fabric rolling machine with length counter, AC inverter VFD fabric inspection, selvage guider fabric machine, bow pipe crease control, textile machinery manufacturer Ahmedabad, Niruma Textile Machinery',
+    'gallery'     => array(
+        'assets/img/portfolio/Fabric-Inspection-and-Rolling-Machine-Niruma.webp',
+    ),
+    'intro'       => array(
+        'The <b>Fabric Inspection and Rolling Machine</b> by <b>Niruma Textile Machinery</b> combines two operations in one machine: <b>fabric inspection</b> and <b>fabric rolling</b>. The operator spreads the fabric on the <b>inclined inspection table</b>, scans it visually for weaving faults, colour variation, stains, holes and other defects, and simultaneously rolls it into a tight, even roll &mdash; without removing the fabric from the machine.',
+        'Crease control and straight rolling are handled by a <b>bow pipe / scroll roll</b> and a <b>selvage guider</b>, which keeps the roll edge straight and the winding tension even. Speed is controlled by an <b>AC inverter variable frequency drive</b>, so the same machine can run slowly for detailed defect checking and fast for bulk rolling. <b>CNC-aligned rollers with shafts in perfect alignment</b> ensure smooth fabric movement without snagging.',
+        'We manufacture and export these machines from Odhav, Ahmedabad for composite mills, fabric manufacturers, exporters, dyeing units and fabric trading houses.',
+    ),
+    'features'    => array(
+        'Machine frame in mild steel construction with tie bars and guide roller deposit board',
+        'Inclined inspection table for comfortable visual inspection',
+        'Various fabric input and output options',
+        'Variable machine speed',
+        'Bow pipe / scroll roll to control crease',
+        'Selvage guider for straight rolling',
+        'Set tension controls',
+        'Driven by an imported gear box with electric motor',
+        'AC inverter variable frequency drive for speed and forward / reverse direction control',
+        'CNC aligned rollers with shafts in perfect alignment for smooth fabric movement',
+    ),
+    'why'         => array(
+        array('t' => 'Flexible operation', 'd' => 'Various fabric input and output options, adjustable speed and set tension controls let the machine adapt to different fabric types, widths and rolling requirements.'),
+        array('t' => 'Advanced drive technology', 'd' => 'An imported gear box combined with an AC inverter VFD gives accurate control over speed and forward / reverse direction, improving both efficiency and roll quality.'),
+        array('t' => 'Comfortable inspection', 'd' => 'The inclined inspection table lets the operator inspect fabric naturally while it rolls, which improves defect detection and reduces operator fatigue.'),
+        array('t' => 'Crease-free, straight rolls', 'd' => 'The bow pipe / scroll roll controls crease formation and the selvage guider keeps the roll straight, so the finished roll is presentable and easy to handle downstream.'),
+        array('t' => 'Smooth fabric movement', 'd' => 'CNC-aligned rollers with perfectly aligned shafts keep fabric travelling evenly, preventing snagging, dragging and edge distortion.'),
+        array('t' => 'Quality and innovation', 'd' => 'Niruma machines are built to meet high industry standards and are backed by installation, commissioning and service support.'),
+    ),
+    'specs'       => array(
+        array(
+            'title' => 'Machine Specification',
+            'rows'  => array(
+                array('k' => 'Machine Type', 'v' => 'Fabric Inspection cum Rolling Machine (combined)'),
+                array('k' => 'Frame Construction', 'v' => 'Mild steel with tie bars, guide roller deposit board'),
+                array('k' => 'Inspection Table', 'v' => 'Inclined inspection table'),
+                array('k' => 'Speed Control', 'v' => 'Variable speed'),
+                array('k' => 'Drive', 'v' => 'Imported gear box with electric motor'),
+                array('k' => 'Electrical Control', 'v' => 'AC inverter variable frequency drive (speed + forward / reverse)'),
+                array('k' => 'Rollers', 'v' => 'CNC aligned rollers with shafts in perfect alignment'),
+                array('k' => 'Crease Control', 'v' => 'Bow pipe / scroll roll'),
+                array('k' => 'Straight Rolling', 'v' => 'Selvage guider'),
+                array('k' => 'Tension', 'v' => 'Set tension controls'),
+                array('k' => 'Input / Output', 'v' => 'Various fabric input and output options'),
+                array('k' => 'Available Widths', 'v' => 'As per fabric width requirement (customisable)'),
+                array('k' => 'Manufacturer', 'v' => 'Niruma Textile Machinery, ' . NAP_CITY . ', ' . NAP_REGION . ', India'),
+            ),
+        ),
+    ),
+    'applications' => array(
+        'Composite mills and fabric manufacturers',
+        'Weaving and spinning mills',
+        'Garment and apparel exporters',
+        'Dyeing and processing units',
+        'Fabric trading and warehousing',
+        'Home textile and curtain fabric units',
+        'Upholstery and technical fabric producers',
+    ),
+    'notes'       => array(
+        'Spread the fabric onto the inclined inspection table, align the selvage with the selvage guider and set the desired speed on the AC inverter VFD. Run the machine slowly first for defect inspection, then increase speed for bulk rolling.',
+        'The bow pipe / scroll roll should be positioned to give a slight bow across the fabric width. This is what prevents crease formation as the fabric winds onto the roll.',
+        'Use the tension controls to suit fabric weight &mdash; light fabrics need lower tension than denim or canvas. Roll quality is usually judged on edge straightness, which is controlled directly by the selvage guider.',
+    ),
+    'faqs'        => array(
+        array('q' => 'What is a fabric inspection and rolling machine?', 'a' => 'It is a combined machine where fabric is visually inspected for weaving faults, stains, holes and colour variation on an inclined table while simultaneously being rolled into an even roll. Inspection and rolling happen in one pass, saving time and handling.'),
+        array('q' => 'Why is an inclined inspection table useful?', 'a' => 'An inclined table lets the operator view the fabric naturally without bending, which reduces fatigue during long inspection sessions and improves defect detection.'),
+        array('q' => 'What does the AC inverter VFD control?', 'a' => 'The AC inverter variable frequency drive controls machine speed and the forward / reverse direction. This lets the same machine run slowly for detailed defect checking and quickly for bulk rolling.'),
+        array('q' => 'What is the function of the bow pipe and selvage guider?', 'a' => 'The bow pipe or scroll roll controls crease formation while fabric is being wound. The selvage guider keeps the roll straight and the edges aligned, producing a neat, uniform roll.'),
+        array('q' => 'What widths are available?', 'a' => 'The machine is customisable to your fabric width requirement. Send us your maximum fabric width and roll diameter requirement and we will confirm the configuration in our quotation.'),
+        array('q' => 'Can this machine be supplied without the rolling function?', 'a' => 'Yes. We can supply inspection-only configurations if your process requires it. Mention your requirement when requesting a quotation.'),
+    ),
+    'enquiry_hints' => array(
+        'Maximum fabric width',
+        'Fabric type and weight (GSM)',
+        'Roll diameter required',
+        'Required rolling speed in metres per minute',
+        'Quantity required and delivery location',
+    ),
+    'related'     => array('fabric-rolling-machine', 'fabric-folding-machine', 'fabric-roll-wrapping-machine'),
+);
+include __DIR__ . '/product-template.php';

@@ -1,0 +1,149 @@
+# ==========================================================
+#  Niruma Textile Machinery - Apache configuration
+#  Goals: one canonical URL per page, fast delivery, SEO friendly
+#  Canonical = HTTPS + non-www + extensionless + no trailing slash
+# ==========================================================
+
+Options +FollowSymLinks -Indexes
+DirectoryIndex index.php
+AddDefaultCharset UTF-8
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# --------------------------------------------------------------
+# 1. Canonical host + scheme.
+#    Skipped for localhost / 127.0.0.1 so XAMPP keeps working.
+# --------------------------------------------------------------
+RewriteCond %{HTTPS} !=on
+RewriteCond %{HTTP_HOST} !^localhost [NC]
+RewriteCond %{HTTP_HOST} !^127\.0\.0\.1 [NC]
+RewriteRule ^ https://nirumatextilemachinery.in%{REQUEST_URI} [R=301,L,NE]
+
+RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+RewriteCond %{HTTP_HOST} !^www\.localhost [NC]
+RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L,NE]
+
+# 1b. Remember the scheme so steps 2-4 can build an absolute
+#     Location header. By this point the host/scheme above are
+#     already canonical (or still localhost), so HTTP_HOST is safe
+#     to reuse and no second https->http downgrade can occur.
+RewriteCond %{HTTPS} =on
+RewriteRule ^ - [E=NTM_SCHEME:s]
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ - [E=NTM_SCHEME:]
+
+# --------------------------------------------------------------
+# 2-5. Canonical URL redirects.
+#
+#  IMPORTANT: redirect targets are built from %{REQUEST_URI} with an
+#  absolute scheme+host, NOT from a per-directory substitution.
+#  A relative substitution gets the per-directory prefix prepended,
+#  which Apache-on-Windows mangles into "/C:/xampp/htdocs/..." and
+#  which resolves differently on every host. REQUEST_URI is the
+#  actual path the visitor requested, so this form produces the
+#  correct Location header on localhost, staging and production.
+#
+#  %{ENV:REDIRECT_STATUS} ensures these only run on the original
+#  request, so the internal rewrite in step 5 cannot loop.
+# --------------------------------------------------------------
+
+# 2. /index.php and /index  ->  the directory root (canonical homepage)
+RewriteCond %{ENV:REDIRECT_STATUS} ^$
+RewriteCond %{REQUEST_URI} ^(.*)/index(\.php)?$ [NC]
+RewriteRule ^.*$ http%{ENV:NTM_SCHEME}://%{HTTP_HOST}%1/ [R=301,L,NE]
+
+# 3. Strip a trailing slash: /about-us/  ->  /about-us
+RewriteCond %{ENV:REDIRECT_STATUS} ^$
+RewriteCond %{REQUEST_URI} ^(.+[^/])/$ [NC]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^.*$ http%{ENV:NTM_SCHEME}://%{HTTP_HOST}%1 [R=301,L,NE]
+
+# 4. Strip the .php extension: /about-us.php  ->  /about-us
+#    .html is deliberately NOT stripped - googlefd39055d56a7cc0e.html
+#    is the Google Search Console verification file and must remain
+#    reachable at its exact name.
+RewriteCond %{ENV:REDIRECT_STATUS} ^$
+RewriteCond %{REQUEST_URI} ^(.+)\.php$ [NC]
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^.*$ http%{ENV:NTM_SCHEME}://%{HTTP_HOST}%1 [R=301,L,NE]
+
+# 5. Extensionless -> real file (internal rewrite, URL unchanged).
+#    This is what makes /about-us serve about-us.php
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.+)$ $1.php [L]
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.html -f
+RewriteRule ^(.+)$ $1.html [L]
+
+# --------------------------------------------------------------
+# 6. Block internal templates, logs and hidden/dev files (403)
+# --------------------------------------------------------------
+RewriteRule ^(seo|product-template)(\.php)?$ - [F,L]
+RewriteRule ^(error_log|debug\.log|.*\.sql|.*\.bak)$ - [F,L]
+RewriteRule ^\.well-known/acme-challenge - [L]
+RewriteRule ^(\.|wp-admin|wp-login|wp-content|wp-includes|\.git|\.svn|\.env|composer\.) - [F,L]
+
+# --------------------------------------------------------------
+# 7. Deny directory browsing anywhere under /assets
+#    Options -Indexes above already covers this; kept as a
+#    belt-and-braces rule for hosts that ignore it.
+# --------------------------------------------------------------
+RewriteRule ^assets/.*/$ - [F,L]
+RewriteRule ^assets/$ - [F,L]
+
+</IfModule>
+
+# ==========================================================
+# 8. Security headers
+# ==========================================================
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+    Header unset X-Powered-By
+</IfModule>
+
+# ==========================================================
+# 9. Compression - improves Core Web Vitals
+# ==========================================================
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css
+    AddOutputFilterByType DEFLATE application/javascript application/x-javascript
+    AddOutputFilterByType DEFLATE application/json application/xml
+    AddOutputFilterByType DEFLATE image/svg+xml application/rss+xml
+</IfModule>
+
+# ==========================================================
+# 10. Browser caching
+# ==========================================================
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresDefault                          "access plus 1 month"
+    ExpiresByType text/html                 "access plus 0 seconds"
+    ExpiresByType text/css                  "access plus 1 year"
+    ExpiresByType application/javascript    "access plus 1 year"
+    ExpiresByType image/webp                "access plus 1 year"
+    ExpiresByType image/png                 "access plus 1 year"
+    ExpiresByType image/jpeg                "access plus 1 year"
+    ExpiresByType image/svg+xml             "access plus 1 year"
+    ExpiresByType font/woff2                "access plus 1 year"
+    ExpiresByType application/pdf           "access plus 1 month"
+    ExpiresByType application/xml           "access plus 1 day"
+    ExpiresByType text/xml                  "access plus 1 day"
+</IfModule>
+
+<IfModule mod_mime.c>
+    AddType image/webp .webp
+</IfModule>
+
+# --------------------------------------------------------------
+# PHP handler is intentionally NOT pinned here.
+# Pinning "ea-php82" would break the whole site with a 500 on any
+# account running a different PHP version. Let cPanel apply the
+# account/domain default (MultiPHP Manager), or re-add the
+# "php -- BEGIN cPanel-generated handler" block that cPanel writes
+# for you in cPanel > Domains > Docroot after selecting a version.
+# --------------------------------------------------------------

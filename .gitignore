@@ -1,0 +1,26 @@
+# Server / PHP logs
+error_log
+*.log
+
+# Local environment
+.env
+.env.*
+*.local.php
+
+# Editor and OS cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*~
+.idea/
+.vscode/
+
+# Deployment artefacts
+*.zip
+*.tar.gz
+
+# Note: assets/vendor/ is intentionally committed. This site has no build
+# step - the vendored Bootstrap, AOS, Swiper, GLightbox, Isotope,
+# PureCounter, Waypoints, Boxicons and Bootstrap Icons files are loaded
+# directly by header.php and are required for the site to work.

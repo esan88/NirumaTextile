@@ -8,7 +8,7 @@
         <div class="row">
 
           <div class="col-lg-3 col-md-6 footer-contact">
-            <h3><a href="<?php echo niruma_url('index'); ?>"><?php echo SITE_NAME; ?></a></h3>
+            <h3><a href="<?php echo niruma_url(''); ?>"><?php echo SITE_NAME; ?></a></h3>
             <address>
               <?php echo NAP_STREET; ?><br>
               <?php echo NAP_CITY; ?> &ndash; <?php echo NAP_POSTCODE; ?>, <?php echo NAP_REGION; ?>, India

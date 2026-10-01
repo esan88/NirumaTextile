@@ -8,22 +8,34 @@
 if (!defined('SITE_NAME')) {
 
     /* ---------- Identity ----------
-     * SITE_URL is the canonical production origin and is what gets emitted
-     * in canonical tags, hreflang, JSON-LD @id and sitemap entries.
+     * SITE_URL is the origin every internal link, asset URL, canonical
+     * tag, hreflang entry and JSON-LD @id is built from.
      *
-     * When previewing on a local Apache/XAMPP host we serve the same files
-     * from that host instead, so CSS/JS/images actually load while testing.
-     * The guard is deliberately narrow: plain http on localhost/127.0.0.1
-     * only. Any real request - including production over https - keeps the
-     * canonical production origin.
+     * On the two production domains that origin is the canonical
+     * production one. On ANY other host (localhost, 127.0.0.1, a LAN IP
+     * used for phone testing, a staging vhost) the origin is the host the
+     * page was actually requested from, including the directory it is
+     * served from, so navigation, form posts and static assets stay on
+     * the preview server. Serving fonts from a different origin than the
+     * page trips CORS and every icon font renders as an empty box, which
+     * is exactly the bug this guard exists to prevent.
      */
-    $__ntmHost = isset($_SERVER['HTTP_HOST']) ? strtolower($_SERVER['HTTP_HOST']) : '';
-    $__ntmLocalPreview = in_array($__ntmHost, array('localhost', 'localhost:80', '127.0.0.1', '127.0.0.1:80', '[::1]'), true)
-        && empty($_SERVER['HTTPS']);
-    unset($__ntmHost);
+    $__ntmHost  = isset($_SERVER['HTTP_HOST']) ? strtolower($_SERVER['HTTP_HOST']) : '';
+    $__ntmIsProd = in_array($__ntmHost, array('nirumatextilemachinery.in', 'www.nirumatextilemachinery.in'), true);
+    $__ntmSiteUrl = 'https://nirumatextilemachinery.in';
+    if ($__ntmHost !== '' && !$__ntmIsProd) {
+        /* dirname(SCRIPT_NAME) is the install directory: '' for a
+         * domain-root install, '/niruma' under e.g. XAMPP's htdocs. */
+        $__ntmDir  = str_replace('\\', '/', dirname(isset($_SERVER['SCRIPT_NAME']) ? $_SERVER['SCRIPT_NAME'] : '/'));
+        $__ntmBase = ($__ntmDir === '/' || $__ntmDir === '.' || $__ntmDir === '') ? '' : rtrim($__ntmDir, '/');
+        $__ntmScheme = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== '' && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+        $__ntmSiteUrl = $__ntmScheme . '://' . $__ntmHost . $__ntmBase;
+    }
+    unset($__ntmHost, $__ntmIsProd, $__ntmDir, $__ntmBase, $__ntmScheme);
 
     define('SITE_NAME',    'Niruma Textile Machinery');
-    define('SITE_URL',     $__ntmLocalPreview ? 'http://localhost/niruma' : 'https://nirumatextilemachinery.in');
+    define('SITE_URL',     $__ntmSiteUrl);
+    unset($__ntmSiteUrl);
     define('SITE_LOCALE',  'en_IN');
     define('SITE_LANG',    'en-IN');
     define('FOUNDED_YEAR', 1980);
@@ -128,16 +140,29 @@ function niruma_image_size($path, $defaultW = 1200, $defaultH = 630)
 /** Canonical URL for the current request, derived from $_SERVER. */
 function niruma_current_url()
 {
-    $scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
-    $host   = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : 'nirumatextilemachinery.in';
-    $uri    = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '/';
-
-    // strip query string and index.php
-    $uri = preg_replace('/\?.*$/', '', $uri);
-    $uri = preg_replace('#/index(\.php)?$#', '/', $uri);
+    /* Scheme + host come from SITE_URL, not from the raw request: that
+     * keeps the canonical on production always https + non-www even when
+     * TLS is terminated at a proxy ($_SERVER['HTTPS'] off) or the request
+     * still carries a www/plain-http host before the .htaccess 301. */
+    $base = SITE_URL;
+    $uri  = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '/';
+    $uri  = preg_replace('/\?.*$/', '', $uri);
+    $uri  = preg_replace('#/index(\.php)?$#', '/', $uri);
     if ($uri === '') $uri = '/';
 
-    return $scheme . '://' . $host . $uri;
+    /* REQUEST_URI already contains the install directory (e.g. /niruma),
+     * which SITE_URL has too - drop it so it is not counted twice. */
+    $path = parse_url($base, PHP_URL_PATH);
+    if ($path && $path !== '/') {
+        if ($uri === $path) {
+            $uri = '/';
+        } elseif (strpos($uri, $path . '/') === 0) {
+            $uri = substr($uri, strlen($path));
+            if ($uri === '') $uri = '/';
+        }
+    }
+
+    return $base . ($uri === '/' ? '/' : $uri);
 }
 
 /** JSON-LD safe output. */

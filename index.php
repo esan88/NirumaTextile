@@ -123,7 +123,7 @@ include("header.php");
       <p class="mt-3 hero-lead">Niruma Textile Machinery designs and manufactures automatic, semi-automatic and manual fabric sample cutting machines, fabric inspection and rolling machines, folding machines, stretch wrapping machines and loom batching motions &mdash; engineered for accuracy, low maintenance and export-grade reliability.</p>
       <div class="d-flex flex-wrap mt-4">
         <a href="#products" class="btn-get-started scrollto">Explore Products</a>
-        <a href="#contact" class="btn-watch-video glightbox"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
+        <a href="https://www.youtube.com/watch?v=9C7n_orMhGw" class="btn-watch-video glightbox"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
       </div>
       <ul class="hero-badges">
         <li><i class="bi bi-check-circle-fill"></i> 45+ Years of Experience</li>
@@ -172,14 +172,17 @@ $class_for = array(0 => 'filter-cutting', 1 => 'filter-cutting', 2 => 'filter-cu
 
 foreach ($products as $i => $p) :
     $slug = $p['slug'];
+    $imgsize = niruma_image_size($p['img'], 1288, 600);
 ?>
         <div class="col-lg-4 col-md-6 portfolio-item <?php echo $class_for[$i]; ?>">
-          <img src="<?php echo niruma_media_url($p['img']); ?>" class="img-fluid" loading="lazy" width="364" height="402" alt="<?php echo htmlspecialchars($p['name'], ENT_QUOTES); ?> by Niruma Textile Machinery">
+          <img src="<?php echo niruma_media_url($p['img']); ?>" class="img-fluid" loading="lazy" width="<?php echo $imgsize[0]; ?>" height="<?php echo $imgsize[1]; ?>" alt="<?php echo htmlspecialchars($p['name'], ENT_QUOTES); ?> by Niruma Textile Machinery">
           <div class="portfolio-info">
             <h4><?php echo htmlspecialchars($p['short'], ENT_QUOTES); ?></h4>
             <p><?php echo htmlspecialchars($p['desc'], ENT_QUOTES); ?></p>
-            <a href="<?php echo niruma_media_url($p['img']); ?>" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="<?php echo htmlspecialchars($p['name'], ENT_QUOTES); ?>"><i class="bx bx-plus"></i><span class="visually-hidden">View image of <?php echo htmlspecialchars($p['short'], ENT_QUOTES); ?></span></a>
-            <a href="<?php echo niruma_url($slug); ?>" class="details-link" title="Read more about <?php echo htmlspecialchars($p['name'], ENT_QUOTES); ?>"><i class="bx bx-link"></i><span class="visually-hidden">Details of <?php echo htmlspecialchars($p['short'], ENT_QUOTES); ?></span></a>
+            <div class="ntm-card-actions">
+              <a href="<?php echo niruma_media_url($p['img']); ?>" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="<?php echo htmlspecialchars($p['name'], ENT_QUOTES); ?>"><i class="bx bx-images" aria-hidden="true"></i> View photo</a>
+              <a href="<?php echo niruma_url($slug); ?>" class="details-link" title="Read more about <?php echo htmlspecialchars($p['name'], ENT_QUOTES); ?>">View details <i class="bx bx-right-arrow-alt" aria-hidden="true"></i></a>
+            </div>
           </div>
         </div>
 <?php endforeach; ?>
@@ -199,7 +202,7 @@ foreach ($products as $i => $p) :
       <div class="row">
         <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
           <div class="icon-box">
-            <div class="icon"><i class="bx bx-factory"></i></div>
+            <div class="icon"><i class="bx bxs-factory"></i></div>
             <h4><a href="<?php echo niruma_url('about-us'); ?>">In-House Manufacturing</a></h4>
             <p>All machines are fabricated, assembled and tested at our Odhav, Ahmedabad plant. We control the material grade, welding quality and final testing instead of reselling someone else's machine.</p>
           </div>
@@ -227,14 +230,14 @@ foreach ($products as $i => $p) :
         </div>
         <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
           <div class="icon-box">
-            <div class="icon"><i class="bx bx-sliders"></i></div>
+            <div class="icon"><i class="bx bx-slider"></i></div>
             <h4><a href="<?php echo niruma_url('fabric-inspection-machine'); ?>">Customised Configurations</a></h4>
             <p>Blade sizes from 13" to 60", layer capacity to 60 mm, batching widths from 1150 mm to 4000 mm and motor/drive options are available on order.</p>
           </div>
         </div>
         <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
           <div class="icon-box">
-            <div class="icon"><i class="bx bx-headset"></i></div>
+            <div class="icon"><i class="bx bx-headphone"></i></div>
             <h4><a href="<?php echo niruma_url('contact-us'); ?>">Lifetime Service Support</a></h4>
             <p>Installation, commissioning, operator training and spare parts support are available for every machine we supply, in India and overseas.</p>
           </div>
@@ -403,28 +406,29 @@ Near S. P. Ring Road, <?php echo NAP_CITY; ?> &ndash; <?php echo NAP_POSTCODE; ?
           </div>
 
           <div class="col-lg-6">
-            <form action="" method="post" role="form" class="php-email-form">
+            <form action="<?php echo niruma_url('enquiry'); ?>" method="post" role="form" class="php-email-form">
+              <div class="ntm-hp" aria-hidden="true"><label for="ntm_website">Leave this field empty</label><input type="text" id="ntm_website" name="ntm_website" value="" tabindex="-1" autocomplete="off"></div>
               <div class="row">
                 <div class="col form-group">
-                  <label class="visually-hidden" for="name">Your Name</label>
+                  <label for="name">Your Name</label>
                   <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
                 </div>
                 <div class="col form-group">
-                  <label class="visually-hidden" for="email">Your Email</label>
+                  <label for="email">Your Email</label>
                   <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
                 </div>
               </div>
               <div class="form-group">
-                <label class="visually-hidden" for="phone">Phone / WhatsApp</label>
+                <label for="phone">Phone / WhatsApp</label>
                 <input type="tel" class="form-control" name="phone" id="phone" placeholder="Phone / WhatsApp">
               </div>
               <div class="form-group">
-                <label class="visually-hidden" for="subject">Subject</label>
+                <label for="subject">Machine / Subject</label>
                 <input type="text" class="form-control" name="subject" id="subject" placeholder="Machine you are interested in" required>
               </div>
               <div class="form-group">
-                <label class="visually-hidden" for="message">Message</label>
-                <textarea class="form-control" name="message" rows="5" placeholder="Fabric type, layer thickness in mm, sample size, quantity…" required></textarea>
+                <label for="message">Your Requirement</label>
+                <textarea class="form-control" id="message" name="message" rows="5" placeholder="Fabric type, layer thickness in mm, sample size, quantity…" required></textarea>
               </div>
               <div class="my-3">
                 <div class="loading">Loading</div>

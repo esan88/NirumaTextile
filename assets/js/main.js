@@ -71,16 +71,21 @@
    * Scrolls to an element with header offset
    */
   const scrollto = (el) => {
-    let header = select('#header')
-    let offset = header.offsetHeight
+    const target = select(el)
+    if (!target) return
 
-    if (!header.classList.contains('header-scrolled')) {
-      offset -= 16
-    }
+    const header = select('#header')
+    const subnav = select('.ntm-subnav')
 
-    let elementPos = select(el).offsetTop
+    // #header is position:sticky and therefore always in the flow, so
+    // its height is the same 86px whether or not the page is scrolled -
+    // no need to guess which state the bar is in.
+    let offset = header ? header.offsetHeight : 0
+    if (subnav) offset += subnav.offsetHeight
+    offset += 16
+
     window.scrollTo({
-      top: elementPos - offset,
+      top: target.offsetTop - offset,
       behavior: 'smooth'
     })
   }
@@ -128,6 +133,7 @@
     const bar = select('#navbar')
     if (!bar) return
     bar.classList.toggle('navbar-mobile', open)
+    document.body.classList.toggle('nav-open', open)
     const btn = select('.mobile-nav-toggle')
     if (btn) {
       btn.classList.toggle('is-open', open)
@@ -161,6 +167,15 @@
     if (toggle) toggle.focus()
   })
 
+  // Dropping back to the desktop breakpoint must not leave the page
+  // scroll-locked behind an invisible sheet.
+  window.addEventListener('resize', () => {
+    const navbar = select('#navbar')
+    if (navbar && navbar.classList.contains('navbar-mobile') && window.innerWidth > 991) {
+      setNav(false)
+    }
+  })
+
   /**
    * Mobile nav dropdowns activate
    */
@@ -173,18 +188,29 @@
   }, true)
 
   /**
-   * Scrool with ofset on links with a class name .scrollto
+   * Scroll with ofset on links with a class name .scrollto
    */
   on('click', '.scrollto', function(e) {
-    if (select(this.hash)) {
-      e.preventDefault()
+    // Nav links such as /products carry .scrollto but no fragment, so
+    // this.hash is "". querySelector('') throws, which used to log an
+    // uncaught DOMException on every menu click.
+    if (!this.hash) return
 
-      const navbar = select('#navbar')
-      if (navbar && navbar.classList.contains('navbar-mobile')) {
-        setNav(false)
-      }
-      scrollto(this.hash)
+    let target
+    try {
+      target = select(this.hash)
+    } catch (err) {
+      return
     }
+    if (!target) return
+
+    e.preventDefault()
+
+    const navbar = select('#navbar')
+    if (navbar && navbar.classList.contains('navbar-mobile')) {
+      setNav(false)
+    }
+    scrollto(this.hash)
   }, true)
 
   /**
@@ -272,19 +298,26 @@
 
   /**
    * Portfolio isotope and filter
+   *
+   * Isotope takes the cards out of normal flow and absolutely positions
+   * them. That only pays off when there is a filter bar to re-arrange for,
+   * and it went wrong here: with no #portfolio-flters in the markup it
+   * still measured the grid once (before the lazy images below the fold
+   * had finished) and never re-measured, which left cards overlapping.
+   * With no filter UI the grid is simply left in normal flow.
    */
   window.addEventListener('load', () => {
     safe('Isotope', () => {
       if (typeof Isotope !== 'function') return
+      let portfolioFilters = select('#portfolio-flters li', true);
+      if (!portfolioFilters.length) return
+
       let portfolioContainer = select('.portfolio-container');
       if (!portfolioContainer) return
 
       const portfolioIsotope = new Isotope(portfolioContainer, {
         itemSelector: '.portfolio-item'
       });
-
-      let portfolioFilters = select('#portfolio-flters li', true);
-      if (!portfolioFilters.length) return
 
       on('click', '#portfolio-flters li', function(e) {
         e.preventDefault();

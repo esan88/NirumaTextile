@@ -105,7 +105,7 @@ include("header.php");
 
       <div class="row">
         <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-          <div class="icon-box"><div class="icon"><i class="bx bx-factory"></i></div><h4><a href="<?php echo niruma_url('fully-automatic-sample-cutting-machine'); ?>">In-House Manufacturing</a></h4><p>Every machine is fabricated, assembled and trial-tested at our Odhav plant. We control steel grade, welding quality and final testing in-house.</p></div>
+          <div class="icon-box"><div class="icon"><i class="bx bxs-factory"></i></div><h4><a href="<?php echo niruma_url('fully-automatic-sample-cutting-machine'); ?>">In-House Manufacturing</a></h4><p>Every machine is fabricated, assembled and trial-tested at our Odhav plant. We control steel grade, welding quality and final testing in-house.</p></div>
         </div>
         <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
           <div class="icon-box"><div class="icon"><i class="bx bx-ruler"></i></div><h4><a href="<?php echo niruma_url('automatic-sample-cutting-machine'); ?>">Precision-Focused Design</a></h4><p>Calibrated scale bars, red laser zero-mark references, graduated guide plates, bow pipes, selvage guiders and CNC-aligned rollers for repeatable accuracy.</p></div>
@@ -117,10 +117,10 @@ include("header.php");
           <div class="icon-box"><div class="icon"><i class="bx bx-globe"></i></div><h4><a href="<?php echo niruma_url('contact-us'); ?>">Export Expertise</a></h4><p>Documentation, packing and clear machine videos with every export order, plus commissioning support for overseas buyers.</p></div>
         </div>
         <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-          <div class="icon-box"><div class="icon"><i class="bx bx-sliders"></i></div><h4><a href="<?php echo niruma_url('fabric-inspection-machine'); ?>">Customisation</a></h4><p>Blade sizes from 13" to 60", layer capacity to 60 mm, loom batching widths from 1150 mm to 4000 mm, and motor, drive and table options on request.</p></div>
+          <div class="icon-box"><div class="icon"><i class="bx bx-slider"></i></div><h4><a href="<?php echo niruma_url('fabric-inspection-machine'); ?>">Customisation</a></h4><p>Blade sizes from 13" to 60", layer capacity to 60 mm, loom batching widths from 1150 mm to 4000 mm, and motor, drive and table options on request.</p></div>
         </div>
         <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-          <div class="icon-box"><div class="icon"><i class="bx bx-headset"></i></div><h4><a href="<?php echo niruma_url('contact-us'); ?>">After-Sales Service</a></h4><p>Installation, commissioning, operator training and spare parts support for every machine &mdash; within India and overseas.</p></div>
+          <div class="icon-box"><div class="icon"><i class="bx bx-headphone"></i></div><h4><a href="<?php echo niruma_url('contact-us'); ?>">After-Sales Service</a></h4><p>Installation, commissioning, operator training and spare parts support for every machine &mdash; within India and overseas.</p></div>
         </div>
       </div>
     </div>
@@ -191,13 +191,17 @@ include("header.php");
         <p>Eleven machine models for fabric sample cutting, inspection, rolling, folding and roll packing</p>
       </div>
       <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
-<?php foreach (niruma_products() as $p) : ?>
+<?php foreach (niruma_products() as $p) :
+    $imgsize = niruma_image_size($p['img'], 1288, 600);
+?>
         <div class="col-lg-4 col-md-6 portfolio-item">
-          <img src="<?php echo niruma_media_url($p['img']); ?>" class="img-fluid" loading="lazy" width="364" height="402" alt="<?php echo htmlspecialchars($p['name'], ENT_QUOTES); ?> by Niruma Textile Machinery">
+          <img src="<?php echo niruma_media_url($p['img']); ?>" class="img-fluid" loading="lazy" width="<?php echo $imgsize[0]; ?>" height="<?php echo $imgsize[1]; ?>" alt="<?php echo htmlspecialchars($p['name'], ENT_QUOTES); ?> by Niruma Textile Machinery">
           <div class="portfolio-info">
             <h4><?php echo htmlspecialchars($p['short'], ENT_QUOTES); ?></h4>
             <p><?php echo htmlspecialchars($p['desc'], ENT_QUOTES); ?></p>
-            <a href="<?php echo niruma_url($p['slug']); ?>" class="details-link" title="More details about <?php echo htmlspecialchars($p['name'], ENT_QUOTES); ?>"><i class="bx bx-link"></i><span class="visually-hidden">Details</span></a>
+            <div class="ntm-card-actions">
+              <a href="<?php echo niruma_url($p['slug']); ?>" class="details-link" title="More details about <?php echo htmlspecialchars($p['name'], ENT_QUOTES); ?>">View details <i class="bx bx-right-arrow-alt" aria-hidden="true"></i></a>
+            </div>
           </div>
         </div>
 <?php endforeach; ?>

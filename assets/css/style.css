@@ -385,7 +385,9 @@ h6 {
 .navbar-mobile ul {
   display: block;
   position: absolute;
-  top: 55px;
+  /* Must clear the close button (top:15px + 44px target = 59px) or the
+     first menu item sits underneath it. */
+  top: 70px;
   right: 15px;
   bottom: 15px;
   left: 15px;
@@ -1459,7 +1461,7 @@ section {
 .faq .faq-list .question {
   display: block;
   position: relative;
-  font-family: #005e72;
+  font-family: "Poppins", sans-serif;
   font-size: 18px;
   line-height: 24px;
   font-weight: 400;
@@ -1874,13 +1876,33 @@ summary:focus-visible,
 
 /*--------------------------------------------------------------
   3. Header
+  BizLand flips #header to position:fixed as soon as the page is
+  scrolled, which pulls its 86px out of the flow. The whole document
+  then jumps up by 86px in one frame, and every in-page link lands 86px
+  short - under the bar - because the browser computed the jump against
+  the pre-flip layout. position:sticky keeps the bar in the flow: it
+  still parks under the top bar, the document never moves, and
+  .fixed-top can be reduced to pure decoration.
 --------------------------------------------------------------*/
 #header {
   height: 86px;
+  position: sticky;
+  top: 0;
 }
 
 #header.fixed-top {
-  height: 72px;
+  position: sticky;
+  /* Height deliberately unchanged: shrinking an in-flow element is the
+     jump we are trying to remove. The logo shrinks instead. */
+  height: 86px;
+}
+
+/* BizLand pairs .fixed-top with a 70px spacer on the element that
+   follows the header, to replace the space the bar left behind when it
+   went position:fixed. The bar no longer leaves the flow, so that spacer
+   now pushes the whole page down by 70px on the first scroll. */
+.scrolled-offset {
+  margin-top: 0;
 }
 
 /* The logo image is 145x96 (aspect 1.51). It was previously forced
@@ -1909,7 +1931,17 @@ summary:focus-visible,
   #header.fixed-top .logo img { height: 38px; }
 }
 
-/* Top bar */
+/* Top bar.
+   The template pins #topbar to a fixed 40px while .contact-info wraps.
+   On a phone the three contact links need two rows (64px), so the second
+   row spilled out of the teal band onto the white page - white text on a
+   white background. Let the band grow with its content instead. */
+#topbar {
+  height: auto;
+  min-height: 40px;
+  padding: 4px 0;
+}
+
 #topbar .contact-info {
   display: flex;
   flex-wrap: wrap;
@@ -1966,10 +1998,34 @@ summary:focus-visible,
   .mobile-nav-toggle { display: inline-flex; }
 }
 
-.navbar-mobile .mobile-nav-toggle { color: var(--ntm-brand); }
+.navbar-mobile .mobile-nav-toggle {
+  /* The open menu is a near-black sheet, so the brand teal close button
+     only reached ~2.8:1 contrast. White on rgba(9,9,9,.9) is 19:1. */
+  color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+.navbar-mobile .mobile-nav-toggle:hover {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: #fff;
+}
+
+/* Keyboard users can hover a dropdown, so let focus do the same. */
+.navbar .dropdown:focus-within > ul {
+  opacity: 1;
+  top: 100%;
+  visibility: visible;
+}
+
+/* Lock the page behind the open mobile sheet (toggled in main.js). */
+body.nav-open {
+  overflow: hidden;
+}
 
 /*--------------------------------------------------------------
   4. Anchor offset for the sticky header
+  72px fixed header + ~54px sticky .ntm-subnav on product pages.
 --------------------------------------------------------------*/
 :target,
 #hero,
@@ -1980,10 +2036,65 @@ summary:focus-visible,
 #operation,
 #faq,
 #inquiry,
-#related,
+#related {
+  /* 86px sticky header + 49px sticky sub-nav + 16px breathing room */
+  scroll-margin-top: 151px;
+}
+
 #product-range,
-#industries {
-  scroll-margin-top: 96px;
+#industries,
+.ntm-group {
+  /* 86px sticky header + 16px breathing room (no sub-nav here) */
+  scroll-margin-top: 102px;
+}
+
+/*--------------------------------------------------------------
+  4b. Hero container height
+  The BizLand base pins #hero to 75vh (100vh on phones, 120vh on short
+  screens) while every <section> is overflow:hidden. Interior heroes
+  therefore clipped their own copy and the product gallery was cut off
+  mid-image. Let the hero grow with its content instead.
+--------------------------------------------------------------*/
+#hero {
+  height: auto;
+  min-height: 75vh;
+}
+
+/* Interior page heroes use the clean gradient from .ntm-page-hero, not
+   the home photo + white wash (id selectors beat class selectors, so
+   both have to be re-stated here). */
+#hero.ntm-page-hero,
+#hero.ntm-product-hero {
+  height: auto;
+  min-height: 0;
+  background: linear-gradient(180deg, #eef6f9 0%, #ffffff 100%);
+}
+
+#hero.ntm-page-hero::before,
+#hero.ntm-product-hero::before {
+  content: none;
+}
+
+#hero.ntm-page-hero h1 {
+  font-size: clamp(26px, 4vw, 42px);
+  line-height: 1.2;
+}
+
+/* Keep the home photo readable: the flat 60% white wash left the copy
+   fighting the busiest part of the image. */
+#hero::before {
+  background: linear-gradient(100deg, rgba(255, 255, 255, 0.93) 0%, rgba(255, 255, 255, 0.8) 46%, rgba(255, 255, 255, 0.55) 100%);
+}
+
+@media (max-width: 768px) {
+  #hero {
+    min-height: 0;
+    padding: 54px 0;
+  }
+
+  #hero::before {
+    background: rgba(255, 255, 255, 0.84);
+  }
 }
 
 /*--------------------------------------------------------------
@@ -2178,7 +2289,9 @@ summary:focus-visible,
 --------------------------------------------------------------*/
 .ntm-subnav {
   position: sticky;
-  top: 0;
+  /* #header is sticky at the top of the viewport and 86px tall, so this
+     bar parks directly beneath it instead of underneath it. */
+  top: 86px;
   z-index: 900;
   background: #fff;
   border-bottom: 1px solid var(--ntm-line);
@@ -2424,6 +2537,20 @@ summary:focus-visible,
 .details-link:focus {
   color: var(--ntm-brand-dark);
   text-decoration: underline;
+}
+
+/* The BizLand rule above is four classes deep, so it still wins the
+   font-size/colour contest against the flat .details-link rule. Card
+   links were rendering at 24px in #3c3c3c. */
+.portfolio .portfolio-item .portfolio-info .details-link,
+.portfolio .portfolio-item .portfolio-info .preview-link {
+  font-size: 15px;
+  color: var(--ntm-brand);
+}
+
+.portfolio .portfolio-item .portfolio-info .details-link:hover,
+.portfolio .portfolio-item .portfolio-info .preview-link:hover {
+  color: var(--ntm-brand-dark);
 }
 
 /*--------------------------------------------------------------
@@ -2702,6 +2829,16 @@ summary:focus-visible,
 /*--------------------------------------------------------------
   13. Forms
 --------------------------------------------------------------*/
+/* Honeypot slot for enquiry.php: off-screen, aria-hidden and skipped by
+   the keyboard, but still present in the markup for bots to fill. */
+.ntm-hp {
+  position: absolute !important;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
 .php-email-form label {
   display: block;
   font-family: var(--font-heading);
@@ -2741,6 +2878,26 @@ summary:focus-visible,
   border-color: var(--ntm-brand-dark);
 }
 
+/* The template ships white text on #ed3c0d (4.0:1) and on #18d26e
+   (1.9:1) for the form banners - both fail WCAG AA at 16px. Darken the
+   fills, keep the padding and weight. */
+.contact .php-email-form .error-message,
+.php-email-form .error-message {
+  background: #b3261e;
+  border-radius: 6px;
+}
+
+.contact .php-email-form .sent-message,
+.php-email-form .sent-message {
+  background: #0e7a44;
+  border-radius: 6px;
+}
+
+.contact .php-email-form .loading:before,
+.php-email-form .loading:before {
+  border-top-color: #e6ecef;
+}
+
 /*--------------------------------------------------------------
   14. Touch targets & skip link
 --------------------------------------------------------------*/
@@ -2774,6 +2931,12 @@ summary:focus-visible,
 
 /*--------------------------------------------------------------
   15. Footer
+  The template ships a white footer, but the markup was written for a
+  dark one: the company name is inline white (#fff on #fff = invisible)
+  and the link colour was #d6d6d6 (1.4:1 on white). The footer top is
+  therefore painted with the brand's dark teal, and every rule below is
+  id-scoped because the BizLand base rules use #footer and out-rank the
+  plain class selectors this layer used before.
 --------------------------------------------------------------*/
 .footer-links h4,
 .footer-contact h3 {
@@ -2782,15 +2945,73 @@ summary:focus-visible,
   margin-bottom: 16px;
 }
 
-.footer-links a {
+#footer .footer-top {
+  background: var(--ntm-brand-dark);
+}
+
+#footer .footer-top h4 {
+  color: #ffffff;
+}
+
+#footer .footer-top .footer-contact h3 {
+  color: #ffffff;
+}
+
+#footer .footer-top .footer-contact h3 a {
+  color: #ffffff;
+}
+
+#footer .footer-top .footer-contact h3 a:hover,
+#footer .footer-top .footer-contact h3 a:focus {
+  color: #9fe3f2;
+}
+
+#footer .footer-top .footer-contact address {
+  font-style: normal;
+  color: #c8d6dc;
+  line-height: 24px;
+}
+
+#footer .footer-top .footer-contact p,
+#footer .footer-top .footer-contact p a {
+  color: #c8d6dc;
+}
+
+#footer .footer-top .footer-contact p a:hover,
+#footer .footer-top .footer-contact p a:focus {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+#footer .footer-top .footer-links ul i {
+  color: #7fd3e5;
+}
+
+#footer .footer-top .footer-links ul a {
   color: #d6d6d6;
   text-decoration: none;
 }
 
-.footer-links a:hover,
-.footer-links a:focus {
-  color: #fff;
+#footer .footer-top .footer-links ul a:hover,
+#footer .footer-top .footer-links ul a:focus {
+  color: #ffffff;
   text-decoration: underline;
+}
+
+#footer .footer-top .footer-country-note {
+  color: #c8d6dc;
+}
+
+#footer .footer-top .social-links a {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+#footer .footer-top .social-links a:hover,
+#footer .footer-top .social-links a:focus {
+  background: #ffffff;
+  border-color: #ffffff;
+  color: var(--ntm-brand-dark);
 }
 
 .footer-links li {
@@ -2835,5 +3056,235 @@ summary:focus-visible,
   a[href^="http"]::after {
     content: " (" attr(href) ")";
     font-size: 11px;
+  }
+}
+
+/*--------------------------------------------------------------
+  18. Components that shipped without styles
+  index.php and about-us.php use .hero-badges, .stats, .stats-item,
+  .process, .process-step, .step-no, .ntm-cta and .ntm-btn-outline,
+  but neither the BizLand base sheet nor the layer above defined any
+  of them. They rendered as bare text with default list bullets.
+--------------------------------------------------------------*/
+
+/* --- Hero trust badges -------------------------------------- */
+.hero-badges {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 24px;
+  margin: 26px 0 0;
+  padding: 0;
+}
+
+.hero-badges li {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-heading);
+  font-size: 14.5px;
+  font-weight: 500;
+  color: #2a3b44;
+}
+
+.hero-badges i {
+  font-size: 17px;
+  color: var(--ntm-brand);
+}
+
+/* --- Stats strip -------------------------------------------- */
+.stats {
+  background: var(--ntm-brand-dark);
+  color: #fff;
+  padding: 44px 0;
+}
+
+.stats .stats-item {
+  padding: 6px 14px;
+}
+
+.stats .stats-item span {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: clamp(30px, 3.4vw, 40px);
+  font-weight: 700;
+  line-height: 1.1;
+  color: #fff;
+}
+
+.stats .stats-item p {
+  margin: 8px 0 0;
+  padding: 0;
+  font-family: var(--font-heading);
+  font-size: 13px;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: #a9d3de;
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .stats .stats-item {
+    border-left: 1px solid rgba(255, 255, 255, 0.16);
+  }
+  .stats .col-md-6:nth-child(odd) .stats-item {
+    border-left: 0;
+  }
+}
+
+@media (min-width: 992px) {
+  .stats .stats-item {
+    border-left: 1px solid rgba(255, 255, 255, 0.16);
+  }
+  .stats .col-lg-3:first-child .stats-item {
+    border-left: 0;
+  }
+}
+
+/* --- Process / milestone steps ------------------------------ */
+.process-step {
+  height: 100%;
+  background: #fff;
+  border: 1px solid var(--ntm-line);
+  border-radius: var(--ntm-radius);
+  padding: 26px 24px 24px;
+  box-shadow: var(--ntm-shadow);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.process-step:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0, 40, 55, 0.14);
+}
+
+.process-step .step-no {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 54px;
+  height: 54px;
+  padding: 0 14px;
+  margin-bottom: 16px;
+  border-radius: 999px;
+  background: var(--ntm-brand);
+  color: #fff;
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: .02em;
+}
+
+.process-step h4 {
+  margin: 0 0 10px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.process-step p {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--ntm-muted);
+}
+
+/* --- Call to action band ------------------------------------ */
+.ntm-cta {
+  background: linear-gradient(120deg, var(--ntm-brand) 0%, var(--ntm-brand-dark) 100%);
+  color: #fff;
+  padding: 58px 0;
+}
+
+.ntm-cta h2 {
+  margin: 0 0 14px;
+  font-size: clamp(24px, 3vw, 34px);
+  font-weight: 700;
+  color: #fff;
+}
+
+.ntm-cta p {
+  max-width: 760px;
+  margin: 0 auto 26px;
+  font-size: 16.5px;
+  line-height: 1.7;
+  color: #dcf0f6;
+}
+
+/* .btn-get-started is teal on the sheet it now sits on - flip it to
+   white so the primary action stays the brightest thing on the band. */
+.ntm-cta .btn-get-started {
+  background: #ffffff;
+  border-color: #ffffff;
+  color: var(--ntm-brand-dark);
+}
+
+.ntm-cta .btn-get-started:hover,
+.ntm-cta .btn-get-started:focus {
+  background: #dff3f9;
+  border-color: #dff3f9;
+  color: var(--ntm-brand-dark);
+}
+
+.ntm-btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 12px 22px;
+  border: 2px solid rgba(255, 255, 255, 0.75);
+  border-radius: 6px;
+  background: transparent;
+  color: #fff;
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background .2s ease, color .2s ease, border-color .2s ease;
+}
+
+.ntm-btn-outline:hover,
+.ntm-btn-outline:focus {
+  background: #ffffff;
+  border-color: #ffffff;
+  color: var(--ntm-brand-dark);
+  text-decoration: none;
+}
+
+/* --- Contact info boxes ------------------------------------- */
+.contact .info-box i {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  line-height: 1;
+  font-size: 30px;
+}
+
+/* --- Section eyebrow pill ----------------------------------- */
+.section-title h2 {
+  color: var(--ntm-brand);
+}
+
+/* --- Product card action row -------------------------------- */
+.portfolio-info .ntm-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 18px;
+}
+
+/* --- Preloader failsafe -------------------------------------
+   #preloader is only ever removed from the DOM by JS. If the script is
+   blocked or errors before the load handler runs, the white overlay
+   would sit on top of the page forever. Fade it out on its own. */
+#preloader {
+  animation: ntm-preloader-timeout 0s linear 6s forwards;
+}
+
+@keyframes ntm-preloader-timeout {
+  to {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
   }
 }

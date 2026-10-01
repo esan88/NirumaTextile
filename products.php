@@ -162,7 +162,8 @@ foreach ($slugs as $s) :
 
       <div class="row">
         <div class="col-lg-7">
-          <form action="" method="post" role="form" class="php-email-form">
+          <form action="<?php echo niruma_url('enquiry'); ?>" method="post" role="form" class="php-email-form">
+            <div class="ntm-hp" aria-hidden="true"><label for="ntm_website">Leave this field empty</label><input type="text" id="ntm_website" name="ntm_website" value="" tabindex="-1" autocomplete="off"></div>
             <input type="hidden" name="product" value="General enquiry &ndash; product list">
             <div class="row">
               <div class="col form-group">

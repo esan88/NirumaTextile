@@ -109,28 +109,29 @@ Near S. P. Ring Road, <?php echo NAP_CITY; ?> &ndash; <?php echo NAP_POSTCODE; ?
         </div>
 
         <div class="col-lg-6">
-          <form action="" method="post" role="form" class="php-email-form">
+          <form action="<?php echo niruma_url('enquiry'); ?>" method="post" role="form" class="php-email-form">
+            <div class="ntm-hp" aria-hidden="true"><label for="ntm_website">Leave this field empty</label><input type="text" id="ntm_website" name="ntm_website" value="" tabindex="-1" autocomplete="off"></div>
             <div class="row">
               <div class="col form-group">
-                <label class="visually-hidden" for="name">Your Name</label>
+                <label for="name">Your Name</label>
                 <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
               </div>
               <div class="col form-group">
-                <label class="visually-hidden" for="email">Your Email</label>
+                <label for="email">Your Email</label>
                 <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
               </div>
             </div>
             <div class="form-group">
-              <label class="visually-hidden" for="phone">Phone / WhatsApp</label>
+              <label for="phone">Phone / WhatsApp</label>
               <input type="tel" class="form-control" name="phone" id="phone" placeholder="Phone / WhatsApp">
             </div>
             <div class="form-group">
-              <label class="visually-hidden" for="subject">Subject</label>
+              <label for="subject">Machine / Subject</label>
               <input type="text" class="form-control" name="subject" id="subject" placeholder="Machine you are interested in" required>
             </div>
             <div class="form-group">
-              <label class="visually-hidden" for="message">Message</label>
-              <textarea class="form-control" name="message" rows="6" placeholder="Fabric type, maximum layer thickness in mm, sample size in inches, quantity, delivery location…" required></textarea>
+              <label for="message">Your Requirement</label>
+              <textarea class="form-control" id="message" name="message" rows="6" placeholder="Fabric type, maximum layer thickness in mm, sample size in inches, quantity, delivery location…" required></textarea>
             </div>
             <div class="my-3">
               <div class="loading">Sending…</div>

@@ -8,8 +8,8 @@
         <div class="row">
 
           <div class="col-lg-3 col-md-6 footer-contact">
-            <h3><a href="<?php echo niruma_url('index'); ?>" style="color:#fff;"><?php echo SITE_NAME; ?></a></h3>
-            <address style="font-style:normal;">
+            <h3><a href="<?php echo niruma_url('index'); ?>"><?php echo SITE_NAME; ?></a></h3>
+            <address>
               <?php echo NAP_STREET; ?><br>
               <?php echo NAP_CITY; ?> &ndash; <?php echo NAP_POSTCODE; ?>, <?php echo NAP_REGION; ?>, India
             </address>
@@ -69,11 +69,11 @@
             <h4 class="mt-4">Our Social Networks</h4>
 
             <div class="social-links mt-3">
-              <a href="<?php echo SOCIAL_YOUTUBE; ?>" class="youtube" target="_blank" rel="noopener" aria-label="Niruma Textile Machinery on YouTube"><i class="bxl-youtube" aria-hidden="true"></i></a>
+              <a href="<?php echo SOCIAL_YOUTUBE; ?>" class="youtube" target="_blank" rel="noopener" aria-label="Niruma Textile Machinery on YouTube"><i class="bx bxl-youtube" aria-hidden="true"></i></a>
             </div>
 
             <h4 class="mt-4">Working With Buyers Across</h4>
-            <p style="color:#d6d6d6;">India &middot; Bangladesh &middot; Pakistan &middot; UAE &middot; Saudi Arabia &middot; Egypt &middot; Turkey &middot; Vietnam &middot; Italy &middot; Spain &middot; Mexico</p>
+            <p class="footer-country-note">India &middot; Bangladesh &middot; Pakistan &middot; UAE &middot; Saudi Arabia &middot; Egypt &middot; Turkey &middot; Vietnam &middot; Italy &middot; Spain &middot; Mexico</p>
           </div>
 
         </div>

@@ -407,7 +407,7 @@ function niruma_render_faq($faqs, $id = 'faq')
         $html .= '<i class="bi bi-plus-lg ntm-faq__sign" aria-hidden="true"></i>';
         $html .= '</summary>';
         $html .= '<div class="ntm-faq__a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">';
-        $html .= '<div itemsprop="text">' . $f['a'] . '</div>';
+        $html .= '<div itemprop="text">' . $f['a'] . '</div>';
         $html .= '</div>';
         $html .= '</details>';
     }

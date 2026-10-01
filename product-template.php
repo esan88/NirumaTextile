@@ -208,7 +208,7 @@ $hero_summary = !empty($P['short_desc']) ? $P['short_desc'] : strip_tags($P['met
           </div>
           <p class="ntm-actions">
             <a href="#inquiry" class="btn-get-started scrollto">Get a Price</a>
-            <a href="<?php echo niruma_url('Niruma-TM-Catalogue.pdf'); ?>" class="details-link" download><i class="bx bx-file-earmark-arrow-down" aria-hidden="true"></i> Download Catalogue</a>
+            <a href="<?php echo niruma_url('Niruma-TM-Catalogue.pdf'); ?>" class="details-link" download><i class="bx bx-download" aria-hidden="true"></i> Download Catalogue</a>
           </p>
         </div>
       </div>
@@ -347,7 +347,8 @@ foreach ($specRows as $tbl) {
 
       <div class="row">
         <div class="col-lg-7">
-          <form action="" method="post" role="form" class="php-email-form">
+          <form action="<?php echo niruma_url('enquiry'); ?>" method="post" role="form" class="php-email-form">
+            <div class="ntm-hp" aria-hidden="true"><label for="ntm_website">Leave this field empty</label><input type="text" id="ntm_website" name="ntm_website" value="" tabindex="-1" autocomplete="off"></div>
             <input type="hidden" name="product" value="<?php echo htmlspecialchars($P['name'], ENT_QUOTES); ?>">
             <div class="row">
               <div class="col form-group">
@@ -407,7 +408,7 @@ foreach ($specRows as $tbl) {
               <li><?php echo htmlspecialchars($hint, ENT_QUOTES); ?></li>
 <?php endforeach; ?>
             </ul>
-            <a href="<?php echo niruma_url('Niruma-TM-Catalogue.pdf'); ?>" download class="details-link"><i class="bx bx-file-earmark-arrow-down" aria-hidden="true"></i> Download full catalogue (PDF)</a>
+            <a href="<?php echo niruma_url('Niruma-TM-Catalogue.pdf'); ?>" download class="details-link"><i class="bx bx-download" aria-hidden="true"></i> Download full catalogue (PDF)</a>
           </div>
 <?php endif; ?>
         </div>
